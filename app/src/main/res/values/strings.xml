@@ -102,5 +102,7 @@
     </string-array>
     <string name="title_activity_register">Sign up</string>
     <string name="tv_login"><u>Login</u></string>
+    <string name="tv_register"><u>Register</u></string>
+    <string name="tv_forgot_password"><u>Forgot password?</u></string>
     <string name="facebook_app_id">1810002905789714</string>
 </resources>
