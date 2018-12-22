@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/button_bg_blue"
+                android:background="@drawable/button_bg_primary"
                 android:text="LOGIN"
                 android:textColor="#fff"
                 android:textStyle="bold" />
