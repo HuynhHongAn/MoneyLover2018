@@ -3,6 +3,7 @@ package com.nmcnpm.nhom10.moneylover;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -29,6 +30,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, OnClickListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -90,11 +92,34 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        TextView tvRegister = findViewById(R.id.tvRegister);
+        tvRegister.setOnClickListener(this);
+
+        TextView tvForgotPassword = findViewById(R.id.tvForgotPassword);
+        tvForgotPassword.setOnClickListener(this);
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
+
+    public void onClick(View v) {
+        Intent intent = null;
+        switch(v.getId()) {
+            case R.id.tvRegister:
+                intent = new Intent(this, RegisterActivity.class);
+                break;
+            case R.id.tvForgotPassword:
+                intent = new Intent(this, ForgotPassword.class);
+                break;
+            default:
+                break;
+        }
+        startActivity(intent);
+    }
+
 
     @Override
     public boolean onSupportNavigateUp(){

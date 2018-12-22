@@ -124,7 +124,8 @@
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="#235A94"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:clickable="true"/>
 
                 <TextView
                     android:id="@+id/tvForgotPassword"
@@ -136,7 +137,8 @@
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:layout_weight="1"
-                    android:textColor="#235A94"/>
+                    android:textColor="#235A94"
+                    android:clickable="true"/>
             </LinearLayout>
 
 
