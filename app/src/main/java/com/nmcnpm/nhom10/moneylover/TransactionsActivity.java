@@ -14,17 +14,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
+public class TransactionsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_transactions);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btnAdd);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,14 +82,16 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_transaction) {
-//            Intent intent = new Intent(this, RegisterActivity.class);
-//            startActivity(intent);
+            //do nothing
         } else if (id == R.id.nav_wallets) {
-
+            Intent intent = new Intent(this, WalletsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_bills) {
-
+            Intent intent = new Intent(this, BillsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_account_setting) {
-
+            Intent intent = new Intent(this, AccountAndSettingsActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
