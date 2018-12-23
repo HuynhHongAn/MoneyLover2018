@@ -43,6 +43,7 @@ public class TransactionsActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -78,19 +79,19 @@ public class TransactionsActivity extends AppCompatActivity
 
         dataModels= new ArrayList<>();
 
-        dataModels.add(new TransactionModel("Apple Pie", "Android 1.0", "1","September 23, 2008"));
-        dataModels.add(new TransactionModel("Banana Bread", "Android 1.1", "2","February 9, 2009"));
-        dataModels.add(new TransactionModel("Cupcake", "Android 1.5", "3","April 27, 2009"));
-        dataModels.add(new TransactionModel("Donut","Android 1.6","4","September 15, 2009"));
-        dataModels.add(new TransactionModel("Eclair", "Android 2.0", "5","October 26, 2009"));
-        dataModels.add(new TransactionModel("Froyo", "Android 2.2", "8","May 20, 2010"));
-        dataModels.add(new TransactionModel("Gingerbread", "Android 2.3", "9","December 6, 2010"));
-        dataModels.add(new TransactionModel("Honeycomb","Android 3.0","11","February 22, 2011"));
-        dataModels.add(new TransactionModel("Ice Cream Sandwich", "Android 4.0", "14","October 18, 2011"));
-        dataModels.add(new TransactionModel("Jelly Bean", "Android 4.2", "16","July 9, 2012"));
-        dataModels.add(new TransactionModel("Kitkat", "Android 4.4", "19","October 31, 2013"));
-        dataModels.add(new TransactionModel("Lollipop","Android 5.0","21","November 12, 2014"));
-        dataModels.add(new TransactionModel("Marshmallow", "Android 6.0", "23","October 5, 2015"));
+        dataModels.add(new TransactionModel("Apple Pie", "Android 1.0", "50,000","September 23, 2008"));
+        dataModels.add(new TransactionModel("Banana Bread", "Android 1.1", "10,000","February 9, 2009"));
+        dataModels.add(new TransactionModel("Cupcake", "Android 1.5", "30,000","April 27, 2009"));
+        dataModels.add(new TransactionModel("Donut","Android 1.6","13,000","September 15, 2009"));
+        dataModels.add(new TransactionModel("Eclair", "Android 2.0", "14,000","October 26, 2009"));
+        dataModels.add(new TransactionModel("Froyo", "Android 2.2", "20,000","May 20, 2010"));
+        dataModels.add(new TransactionModel("Gingerbread", "Android 2.3", "9,000","December 6, 2010"));
+        dataModels.add(new TransactionModel("Honeycomb","Android 3.0","11,0000","February 22, 2011"));
+        dataModels.add(new TransactionModel("Ice Cream Sandwich", "Android 4.0", "14,0000","October 18, 2011"));
+        dataModels.add(new TransactionModel("Jelly Bean", "Android 4.2", "16,0000","July 9, 2012"));
+        dataModels.add(new TransactionModel("Kitkat", "Android 4.4", "19,0000","October 31, 2013"));
+        dataModels.add(new TransactionModel("Lollipop","Android 5.0","21,0000","November 12, 2014"));
+        dataModels.add(new TransactionModel("Marshmallow", "Android 6.0", "23,0000","October 5, 2015"));
 
         adapter= new TransactionAdapter(dataModels,getApplicationContext());
 
@@ -101,7 +102,7 @@ public class TransactionsActivity extends AppCompatActivity
 
                 TransactionModel dataModel= dataModels.get(position);
 
-                Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getType()+" API: "+dataModel.getVersion_number(), Snackbar.LENGTH_LONG)
+                Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getDate()+" API: "+dataModel.getAmount(), Snackbar.LENGTH_LONG)
                         .setAction("No action", null).show();
             }
         });

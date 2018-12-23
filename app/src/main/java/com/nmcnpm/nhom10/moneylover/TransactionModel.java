@@ -2,15 +2,16 @@ package com.nmcnpm.nhom10.moneylover;
 
 public class TransactionModel {
     String name;
-    String type;
-    String version_number;
-    String feature;
+    String date;
+    String amount;
+    String iconScr;
+    Boolean isNegative = true;
 
-    public TransactionModel(String name, String type, String version_number, String feature ) {
-        this.name=name;
-        this.type=type;
-        this.version_number=version_number;
-        this.feature=feature;
+    public TransactionModel(String name, String date, String amount, String iconScr) {
+        this.name = name;
+        this.date = date;
+        this.amount = amount;
+        this.iconScr = iconScr;
 
     }
 
@@ -18,16 +19,16 @@ public class TransactionModel {
         return name;
     }
 
-    public String getType() {
-        return type;
+    public String getDate() {
+        return date;
     }
 
-    public String getVersion_number() {
-        return version_number;
+    public String getAmount() {
+        return amount;
     }
 
-    public String getFeature() {
-        return feature;
+    public String getIcon() {
+        return iconScr;
     }
 
 }

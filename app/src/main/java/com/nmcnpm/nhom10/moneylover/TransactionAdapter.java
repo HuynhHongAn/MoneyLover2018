@@ -21,10 +21,10 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
 
     // View lookup cache
     private static class ViewHolder {
-        TextView txtName;
-        TextView txtType;
-        TextView txtVersion;
-        ImageView info;
+        TextView tvTransactionName;
+        TextView tvTransactionDate;
+        TextView tvTransactionAmount;
+        ImageView tvTransactionIcon;
     }
 
     public TransactionAdapter(ArrayList<TransactionModel> data, Context context) {
@@ -43,8 +43,8 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
 
         switch (v.getId())
         {
-            case R.id.item_info:
-                Snackbar.make(v, "Release date " + TransactionModel.getFeature(), Snackbar.LENGTH_LONG)
+            case R.id.ivTransactionIcon:
+                Snackbar.make(v, "Release date " + TransactionModel.getIcon(), Snackbar.LENGTH_LONG)
                         .setAction("No action", null).show();
                 break;
         }
@@ -63,13 +63,14 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
 
         if (convertView == null) {
 
+
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.transaction_row, parent, false);
-            viewHolder.txtName = (TextView) convertView.findViewById(R.id.name);
-            viewHolder.txtType = (TextView) convertView.findViewById(R.id.type);
-            viewHolder.txtVersion = (TextView) convertView.findViewById(R.id.version_number);
-            viewHolder.info = (ImageView) convertView.findViewById(R.id.item_info);
+            viewHolder.tvTransactionName = (TextView) convertView.findViewById(R.id.tvTransactionName);
+            viewHolder.tvTransactionDate = (TextView) convertView.findViewById(R.id.tvTransactionDate);
+            viewHolder.tvTransactionAmount = (TextView) convertView.findViewById(R.id.tvTransactionAmount);
+            viewHolder.tvTransactionIcon = (ImageView) convertView.findViewById(R.id.ivTransactionIcon);
 
             result=convertView;
 
@@ -83,11 +84,11 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
         result.startAnimation(animation);
         lastPosition = position;
 
-        viewHolder.txtName.setText(TransactionModel.getName());
-        viewHolder.txtType.setText(TransactionModel.getType());
-        viewHolder.txtVersion.setText(TransactionModel.getVersion_number());
-        viewHolder.info.setOnClickListener(this);
-        viewHolder.info.setTag(position);
+        viewHolder.tvTransactionName.setText(TransactionModel.getName());
+        viewHolder.tvTransactionDate.setText(TransactionModel.getDate());
+        viewHolder.tvTransactionAmount.setText(TransactionModel.getAmount());
+        viewHolder.tvTransactionIcon.setOnClickListener(this);
+        viewHolder.tvTransactionIcon.setTag(position);
         // Return the completed view to render on screen
         return convertView;
     }
