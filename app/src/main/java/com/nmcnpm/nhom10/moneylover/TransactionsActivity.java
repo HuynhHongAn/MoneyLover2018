@@ -61,8 +61,11 @@ public class TransactionsActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                // TODO Auto-generated method stub
+                Intent i = new Intent(getApplicationContext(), TransactionCreateActivity.class);
+                startActivity(i);
             }
         });
 
@@ -102,8 +105,11 @@ public class TransactionsActivity extends AppCompatActivity
 
                 TransactionModel dataModel= dataModels.get(position);
 
-                Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getDate()+" API: "+dataModel.getAmount(), Snackbar.LENGTH_LONG)
-                        .setAction("No action", null).show();
+//                Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getDate()+" API: "+dataModel.getAmount(), Snackbar.LENGTH_LONG)
+//                        .setAction("No action", null).show();
+                Intent i = new Intent(getApplicationContext(), TransactionEditActivity.class);
+                startActivity(i);
+
             }
         });
     }

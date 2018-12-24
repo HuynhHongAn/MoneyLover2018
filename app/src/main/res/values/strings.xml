@@ -117,4 +117,6 @@
     <string name="tab_text_3">This month</string>
     <string name="tab_text_4">Next month</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_transaction_create">Add Transaction</string>
+    <string name="title_activity_transaction_edit">Edit Transaction</string>
 </resources>
