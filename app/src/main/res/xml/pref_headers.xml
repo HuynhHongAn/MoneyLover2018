@@ -3,6 +3,12 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
+        android:fragment="com.nmcnpm.nhom10.moneylover.AccountAndSettingsActivity$AccountPreferenceFragment"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="@string/pref_header_account" />
+
+
+    <header
         android:fragment="com.nmcnpm.nhom10.moneylover.AccountAndSettingsActivity$GeneralPreferenceFragment"
         android:icon="@drawable/ic_info_black_24dp"
         android:title="@string/pref_header_general" />

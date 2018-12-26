@@ -152,6 +152,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                findViewById(R.id.login_progress).setVisibility(View.VISIBLE);
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }

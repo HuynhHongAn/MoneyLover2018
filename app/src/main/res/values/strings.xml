@@ -19,12 +19,13 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_account_and_settings">Account and Settings</string>
+    <string name="title_activity_account_and_settings">Settings</string>
 
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
+    <string name="pref_header_account">Account</string>
 
     <string name="pref_title_social_recommendations">Enable social recommendations</string>
     <string name="pref_description_social_recommendations">Recommendations for people to contact
@@ -34,7 +35,7 @@
     <string name="pref_title_display_name">Display name</string>
     <string name="pref_default_display_name">John Smith</string>
 
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string name="pref_title_add_friends_to_messages">Language</string>
     <string-array name="pref_example_list_titles">
         <item>Always</item>
         <item>When possible</item>
@@ -100,6 +101,29 @@
         <item>Russia</item>
         <item>French</item>
     </string-array>
+
+    <string-array name="languages_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="currency_array">
+        <item>USD ($)</item>
+        <item>VND (₫)</item>
+        <item>Pound (£)</item>
+        <item>Baht (฿)</item>
+    </string-array>
+
+    <string-array name="currency_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
     <string name="title_activity_register">Sign up</string>
     <string name="tv_login"><u>Login</u></string>
     <string name="tv_register"><u>Register</u></string>
@@ -120,4 +144,5 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_transaction_create">Add Transaction</string>
     <string name="title_activity_transaction_edit">Edit Transaction</string>
+    <string name="title_change_password">Change Password</string>
 </resources>
