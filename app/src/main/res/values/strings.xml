@@ -105,6 +105,7 @@
     <string name="tv_register"><u>Register</u></string>
     <string name="tv_forgot_password"><u>Forgot password?</u></string>
     <string name="facebook_app_id">1810002905789714</string>
+    <string name="fb_login_protocol_scheme">fb1810002905789714</string>
     <string name="title_activity_forgot_password">Forgot Password</string>
     <string name="title_activity_test">Test</string>
     <string name="title_home">Home</string>
