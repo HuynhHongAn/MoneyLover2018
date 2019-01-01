@@ -3,15 +3,18 @@ package com.nmcnpm.nhom10.moneylover;
 public class TransactionModel {
     String name;
     String date;
-    String amount;
+    Float amount;
     String iconScr;
+    String note;
+    Integer wallet;
     Boolean isNegative = true;
 
-    public TransactionModel(String name, String date, String amount, String iconScr) {
+    public TransactionModel(String name, String date, Float amount, String iconScr, String note) {
         this.name = name;
         this.date = date;
         this.amount = amount;
         this.iconScr = iconScr;
+        this.note = note;
 
     }
 
@@ -23,7 +26,7 @@ public class TransactionModel {
         return date;
     }
 
-    public String getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
@@ -31,4 +34,5 @@ public class TransactionModel {
         return iconScr;
     }
 
+    public String getNote() { return note; }
 }

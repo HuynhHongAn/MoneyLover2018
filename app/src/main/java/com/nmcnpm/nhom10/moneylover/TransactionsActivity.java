@@ -82,19 +82,19 @@ public class TransactionsActivity extends AppCompatActivity
 
         dataModels= new ArrayList<>();
 
-        dataModels.add(new TransactionModel("Apple Pie", "Android 1.0", "50,000","September 23, 2008"));
-        dataModels.add(new TransactionModel("Banana Bread", "Android 1.1", "10,000","February 9, 2009"));
-        dataModels.add(new TransactionModel("Cupcake", "Android 1.5", "30,000","April 27, 2009"));
-        dataModels.add(new TransactionModel("Donut","Android 1.6","13,000","September 15, 2009"));
-        dataModels.add(new TransactionModel("Eclair", "Android 2.0", "14,000","October 26, 2009"));
-        dataModels.add(new TransactionModel("Froyo", "Android 2.2", "20,000","May 20, 2010"));
-        dataModels.add(new TransactionModel("Gingerbread", "Android 2.3", "9,000","December 6, 2010"));
-        dataModels.add(new TransactionModel("Honeycomb","Android 3.0","11,0000","February 22, 2011"));
-        dataModels.add(new TransactionModel("Ice Cream Sandwich", "Android 4.0", "14,0000","October 18, 2011"));
-        dataModels.add(new TransactionModel("Jelly Bean", "Android 4.2", "16,0000","July 9, 2012"));
-        dataModels.add(new TransactionModel("Kitkat", "Android 4.4", "19,0000","October 31, 2013"));
-        dataModels.add(new TransactionModel("Lollipop","Android 5.0","21,0000","November 12, 2014"));
-        dataModels.add(new TransactionModel("Marshmallow", "Android 6.0", "23,0000","October 5, 2015"));
+//        dataModels.add(new TransactionModel("Apple Pie", "Android 1.0", "50,000","September 23, 2008"));
+//        dataModels.add(new TransactionModel("Banana Bread", "Android 1.1", "10,000","February 9, 2009"));
+//        dataModels.add(new TransactionModel("Cupcake", "Android 1.5", "30,000","April 27, 2009"));
+//        dataModels.add(new TransactionModel("Donut","Android 1.6","13,000","September 15, 2009"));
+//        dataModels.add(new TransactionModel("Eclair", "Android 2.0", "14,000","October 26, 2009"));
+//        dataModels.add(new TransactionModel("Froyo", "Android 2.2", "20,000","May 20, 2010"));
+//        dataModels.add(new TransactionModel("Gingerbread", "Android 2.3", "9,000","December 6, 2010"));
+//        dataModels.add(new TransactionModel("Honeycomb","Android 3.0","11,0000","February 22, 2011"));
+//        dataModels.add(new TransactionModel("Ice Cream Sandwich", "Android 4.0", "14,0000","October 18, 2011"));
+//        dataModels.add(new TransactionModel("Jelly Bean", "Android 4.2", "16,0000","July 9, 2012"));
+//        dataModels.add(new TransactionModel("Kitkat", "Android 4.4", "19,0000","October 31, 2013"));
+//        dataModels.add(new TransactionModel("Lollipop","Android 5.0","21,0000","November 12, 2014"));
+//        dataModels.add(new TransactionModel("Marshmallow", "Android 6.0", "23,0000","October 5, 2015"));
 
         adapter= new TransactionAdapter(dataModels,getApplicationContext());
 

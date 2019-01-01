@@ -86,7 +86,7 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
 
         viewHolder.tvTransactionName.setText(TransactionModel.getName());
         viewHolder.tvTransactionDate.setText(TransactionModel.getDate());
-        viewHolder.tvTransactionAmount.setText(TransactionModel.getAmount());
+        viewHolder.tvTransactionAmount.setText(TransactionModel.getAmount().toString());
         viewHolder.tvTransactionIcon.setOnClickListener(this);
         viewHolder.tvTransactionIcon.setTag(position);
         // Return the completed view to render on screen
