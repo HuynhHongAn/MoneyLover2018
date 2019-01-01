@@ -1,5 +1,6 @@
 package com.nmcnpm.nhom10.moneylover;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,29 +27,64 @@ import java.util.Map;
 public class TransactionCreateActivity extends AppCompatActivity {
 
     private static final String TAG = "TransactionCreateActivity";
+    EditText etType, etNote, etDate, etWallet, etAmount;
+
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_create);
+        init();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
         // Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
+
+
+        Button btnCreate = (Button) findViewById(R.id.btnCreate);
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Float amount = Float.valueOf(etAmount.getText().toString());
+                String type = etType.getText().toString();
+                String note = etNote.getText().toString();
+                String date = etDate.getText().toString();
+                String wallet = etWallet.getText().toString();
+
+                createTransaction(amount, type, note, date, wallet);
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
+    public void createTransaction(Float amount, String type, String note, String date, String wallet){
+
+        Map<String, Object> transaction = new HashMap<>();
+        transaction.put("amount", amount);
+        transaction.put("type", type);
+        transaction.put("note", note);
+        transaction.put("date", date);
+        transaction.put("wallet", wallet);
 
         // Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
+        db.collection("transactions")
+                .add(transaction)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        //TODO: make toast and return to listing transaction page
+                        Intent intent = new Intent(TransactionCreateActivity.this, TransactionsActivity.class);
+                        startActivity(intent);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -55,11 +93,16 @@ public class TransactionCreateActivity extends AppCompatActivity {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+
     }
 
-    @Override
-    public boolean onSupportNavigateUp(){
-        finish();
-        return true;
+    public void init(){
+        db = FirebaseFirestore.getInstance();
+
+        etType = findViewById(R.id.etType);
+        etNote = findViewById(R.id.etNote);
+        etDate = findViewById(R.id.etDate);
+        etAmount = findViewById(R.id.etAmount);
+        etWallet = findViewById(R.id.etWallet);
     }
 }

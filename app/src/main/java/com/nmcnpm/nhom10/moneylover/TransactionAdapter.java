@@ -24,6 +24,7 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
         TextView tvTransactionName;
         TextView tvTransactionDate;
         TextView tvTransactionAmount;
+        TextView tvNote;
         ImageView tvTransactionIcon;
     }
 
@@ -70,6 +71,7 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
             viewHolder.tvTransactionName = (TextView) convertView.findViewById(R.id.tvTransactionName);
             viewHolder.tvTransactionDate = (TextView) convertView.findViewById(R.id.tvTransactionDate);
             viewHolder.tvTransactionAmount = (TextView) convertView.findViewById(R.id.tvTransactionAmount);
+            viewHolder.tvNote = (TextView) convertView.findViewById(R.id.etNote);
             viewHolder.tvTransactionIcon = (ImageView) convertView.findViewById(R.id.ivTransactionIcon);
 
             result=convertView;
@@ -86,6 +88,7 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
 
         viewHolder.tvTransactionName.setText(TransactionModel.getName());
         viewHolder.tvTransactionDate.setText(TransactionModel.getDate());
+        viewHolder.tvNote.setText(TransactionModel.getNote());
         viewHolder.tvTransactionAmount.setText(TransactionModel.getAmount().toString());
         viewHolder.tvTransactionIcon.setOnClickListener(this);
         viewHolder.tvTransactionIcon.setTag(position);
