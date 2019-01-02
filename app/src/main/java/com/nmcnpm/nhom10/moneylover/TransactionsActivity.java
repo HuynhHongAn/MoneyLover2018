@@ -107,6 +107,7 @@ public class TransactionsActivity extends AppCompatActivity
         dataModels= new ArrayList<>();
 
         db.collection("transactions")
+                .orderBy("date")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -114,12 +115,12 @@ public class TransactionsActivity extends AppCompatActivity
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Float amount = Float.valueOf(document.getData().get("amount").toString());
-                                String type = document.getData().get("type").toString();
+                                String name = document.getData().get("name").toString();
                                 String date = document.getData().get("date").toString();
                                 String note = document.getData().get("note").toString();
                                 String wallet = document.getData().get("wallet").toString();
 
-                                TransactionModel newTransaction = new TransactionModel(amount, type, date, note, wallet);
+                                TransactionModel newTransaction = new TransactionModel(amount, name, date, note, wallet);
                                 dataModels.add(newTransaction);
                                 float tempAmount = newTransaction.getAmount();
                                 if (tempAmount > 0){
@@ -138,6 +139,9 @@ public class TransactionsActivity extends AppCompatActivity
                             tvTotalMoney.setText(format.format(totalNegative + totalPositive));
 
                             listView.setAdapter(adapter);
+
+                            findViewById(R.id.progressBarHolder).setVisibility(View.INVISIBLE);
+
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -158,10 +162,6 @@ public class TransactionsActivity extends AppCompatActivity
                         }
                     }
                 });
-
-
-        dataModels.add(new TransactionModel(50000f, "Dinner", "September 23, 2008","Dinner", "123"));
-        dataModels.add(new TransactionModel(-50000f, "Dinner", "September 23, 2008","Dinner", "123"));
 
         //adapter= new TransactionAdapter(dataModels,getApplicationContext());
 

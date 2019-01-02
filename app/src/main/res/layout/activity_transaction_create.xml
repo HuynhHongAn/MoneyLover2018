@@ -38,16 +38,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:src="@drawable/ic_payment_black_24dp"
+                        android:src="@drawable/ic_help_black_24dp"
                         android:scaleType="fitCenter"
                         android:minHeight="50dp"/>
                     <EditText
-                        android:id="@+id/etAmount"
+                        android:id="@+id/etName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="10"
-                        android:inputType="numberDecimal|numberSigned"
-                        android:hint="Amount"/>
+                        android:hint="Name"/>
 
                 </LinearLayout>
 
@@ -61,15 +60,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:src="@drawable/ic_help_black_24dp"
+                        android:src="@drawable/ic_payment_black_24dp"
                         android:scaleType="fitCenter"
                         android:minHeight="50dp"/>
                     <EditText
-                        android:id="@+id/etType"
+                        android:id="@+id/etAmount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="10"
-                        android:hint="Choose type"/>
+                        android:inputType="numberDecimal|numberSigned"
+                        android:hint="Amount"/>
 
                 </LinearLayout>
 
