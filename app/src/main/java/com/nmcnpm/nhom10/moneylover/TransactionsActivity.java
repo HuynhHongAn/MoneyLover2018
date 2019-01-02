@@ -2,6 +2,7 @@ package com.nmcnpm.nhom10.moneylover;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -24,6 +26,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class TransactionsActivity extends AppCompatActivity
@@ -35,6 +44,15 @@ public class TransactionsActivity extends AppCompatActivity
     ListView listView;
     private static TransactionAdapter adapter;
 
+    FirebaseFirestore db;
+    float totalPositive = 0f;
+    float totalNegative = 0f;
+
+    TextView tvNegativeTotal, tvPositiveTotal, tvTotalMoney;
+    NumberFormat format;
+
+    private static final String TAG = "TransactionsActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +61,12 @@ public class TransactionsActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        db = FirebaseFirestore.getInstance();
+
+        tvNegativeTotal = findViewById(R.id.tvNegativeTotal);
+        tvPositiveTotal = findViewById(R.id.tvPositiveTotal);
+        tvTotalMoney = findViewById(R.id.tvTotalMoney);
+        format = NumberFormat.getCurrencyInstance();
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -82,36 +106,65 @@ public class TransactionsActivity extends AppCompatActivity
 
         dataModels= new ArrayList<>();
 
-//        dataModels.add(new TransactionModel("Apple Pie", "Android 1.0", "50,000","September 23, 2008"));
-//        dataModels.add(new TransactionModel("Banana Bread", "Android 1.1", "10,000","February 9, 2009"));
-//        dataModels.add(new TransactionModel("Cupcake", "Android 1.5", "30,000","April 27, 2009"));
-//        dataModels.add(new TransactionModel("Donut","Android 1.6","13,000","September 15, 2009"));
-//        dataModels.add(new TransactionModel("Eclair", "Android 2.0", "14,000","October 26, 2009"));
-//        dataModels.add(new TransactionModel("Froyo", "Android 2.2", "20,000","May 20, 2010"));
-//        dataModels.add(new TransactionModel("Gingerbread", "Android 2.3", "9,000","December 6, 2010"));
-//        dataModels.add(new TransactionModel("Honeycomb","Android 3.0","11,0000","February 22, 2011"));
-//        dataModels.add(new TransactionModel("Ice Cream Sandwich", "Android 4.0", "14,0000","October 18, 2011"));
-//        dataModels.add(new TransactionModel("Jelly Bean", "Android 4.2", "16,0000","July 9, 2012"));
-//        dataModels.add(new TransactionModel("Kitkat", "Android 4.4", "19,0000","October 31, 2013"));
-//        dataModels.add(new TransactionModel("Lollipop","Android 5.0","21,0000","November 12, 2014"));
-//        dataModels.add(new TransactionModel("Marshmallow", "Android 6.0", "23,0000","October 5, 2015"));
+        db.collection("transactions")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Float amount = Float.valueOf(document.getData().get("amount").toString());
+                                String type = document.getData().get("type").toString();
+                                String date = document.getData().get("date").toString();
+                                String note = document.getData().get("note").toString();
+                                String wallet = document.getData().get("wallet").toString();
 
-        adapter= new TransactionAdapter(dataModels,getApplicationContext());
+                                TransactionModel newTransaction = new TransactionModel(amount, type, date, note, wallet);
+                                dataModels.add(newTransaction);
+                                float tempAmount = newTransaction.getAmount();
+                                if (tempAmount > 0){
+                                    totalPositive += tempAmount;
+                                } else {
+                                    totalNegative += tempAmount;
+                                }
 
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Log.d(TAG, document.getId() + " => " + dataModels);
 
-                TransactionModel dataModel= dataModels.get(position);
+                            }
+
+                            adapter = new TransactionAdapter(dataModels, TransactionsActivity.this);
+                            tvNegativeTotal.setText(format.format(totalNegative));
+                            tvPositiveTotal.setText(format.format(totalPositive));
+                            tvTotalMoney.setText(format.format(totalNegative + totalPositive));
+
+                            listView.setAdapter(adapter);
+                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                                    TransactionModel dataModel= dataModels.get(position);
+
+
 
 //                Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getDate()+" API: "+dataModel.getAmount(), Snackbar.LENGTH_LONG)
 //                        .setAction("No action", null).show();
-                Intent i = new Intent(getApplicationContext(), TransactionEditActivity.class);
-                startActivity(i);
+                                    Intent i = new Intent(getApplicationContext(), TransactionEditActivity.class);
+                                    startActivity(i);
 
-            }
-        });
+                                }
+                            });
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+
+        dataModels.add(new TransactionModel(50000f, "Dinner", "September 23, 2008","Dinner", "123"));
+        dataModels.add(new TransactionModel(-50000f, "Dinner", "September 23, 2008","Dinner", "123"));
+
+        //adapter= new TransactionAdapter(dataModels,getApplicationContext());
+
     }
 
     @Override

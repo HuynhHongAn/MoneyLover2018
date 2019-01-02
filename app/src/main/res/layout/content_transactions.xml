@@ -49,21 +49,21 @@
             android:id="@+id/tvTotalMoney"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="12,230,000"
+            android:text="0"
             android:layout_weight="4"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:layout_gravity="center_vertical"
             android:textSize="24dp"/>
         <TextView
-            android:id="@+id/tvCurrency"
+            android:id="@+id/tvTotalCurrency"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:layout_gravity="center_vertical"
-            android:text="VND"/>
+            android:text="USD"/>
     </LinearLayout>
 
     <LinearLayout
@@ -88,11 +88,12 @@
                 android:textAlignment="center"/>
 
             <TextView
+                android:id="@+id/tvPositiveTotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:textColor="@color/green"
-                android:text="13,000,000"
+                android:text="0"
                 android:textAlignment="center"/>
         </LinearLayout>
 
@@ -113,11 +114,12 @@
                 android:textAlignment="center"/>
 
             <TextView
+                android:id="@+id/tvNegativeTotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:textColor="@color/red"
-                android:text="770,000"
+                android:text="0"
                 android:textAlignment="center"/>
         </LinearLayout>
 

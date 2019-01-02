@@ -2,6 +2,7 @@ package com.nmcnpm.nhom10.moneylover;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class TransactionAdapter extends ArrayAdapter<TransactionModel> implements View.OnClickListener{
@@ -19,20 +21,22 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
     private ArrayList<TransactionModel> dataSet;
     Context mContext;
 
+    NumberFormat format = NumberFormat.getCurrencyInstance();
+
     // View lookup cache
     private static class ViewHolder {
-        TextView tvTransactionName;
-        TextView tvTransactionDate;
-        TextView tvTransactionAmount;
+        TextView tvAmount;
+        TextView tvName;
+        TextView tvDate;
         TextView tvNote;
         ImageView tvTransactionIcon;
+        TextView tvCurrency;
     }
 
     public TransactionAdapter(ArrayList<TransactionModel> data, Context context) {
         super(context, R.layout.transaction_row, data);
         this.dataSet = data;
         this.mContext=context;
-
     }
 
     @Override
@@ -45,7 +49,7 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
         switch (v.getId())
         {
             case R.id.ivTransactionIcon:
-                Snackbar.make(v, "Release date " + TransactionModel.getIcon(), Snackbar.LENGTH_LONG)
+                Snackbar.make(v, "Release date (add transaction wallet here)", Snackbar.LENGTH_LONG)
                         .setAction("No action", null).show();
                 break;
         }
@@ -56,7 +60,7 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        TransactionModel TransactionModel = getItem(position);
+        TransactionModel transactionModel = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
 
@@ -64,14 +68,13 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
 
         if (convertView == null) {
 
-
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.transaction_row, parent, false);
-            viewHolder.tvTransactionName = (TextView) convertView.findViewById(R.id.tvTransactionName);
-            viewHolder.tvTransactionDate = (TextView) convertView.findViewById(R.id.tvTransactionDate);
-            viewHolder.tvTransactionAmount = (TextView) convertView.findViewById(R.id.tvTransactionAmount);
-            viewHolder.tvNote = (TextView) convertView.findViewById(R.id.etNote);
+            viewHolder.tvAmount = (TextView) convertView.findViewById(R.id.tvAmount);
+            viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvName);
+            viewHolder.tvDate = (TextView) convertView.findViewById(R.id.tvDate);
+            viewHolder.tvNote = (TextView) convertView.findViewById(R.id.tvNote);
             viewHolder.tvTransactionIcon = (ImageView) convertView.findViewById(R.id.ivTransactionIcon);
 
             result=convertView;
@@ -86,10 +89,18 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
         result.startAnimation(animation);
         lastPosition = position;
 
-        viewHolder.tvTransactionName.setText(TransactionModel.getName());
-        viewHolder.tvTransactionDate.setText(TransactionModel.getDate());
-        viewHolder.tvNote.setText(TransactionModel.getNote());
-        viewHolder.tvTransactionAmount.setText(TransactionModel.getAmount().toString());
+        Boolean isNavigation = transactionModel.getIsNegative();
+        if (isNavigation){
+            //DO NOTHING
+        }
+        else {
+            viewHolder.tvAmount.setTextColor(Color.parseColor("#256CDE"));
+
+        }
+        viewHolder.tvAmount.setText(format.format(transactionModel.getAmount()));
+        viewHolder.tvName.setText(transactionModel.getName());
+        viewHolder.tvNote.setText(transactionModel.getNote());
+        viewHolder.tvDate.setText(transactionModel.getDate());
         viewHolder.tvTransactionIcon.setOnClickListener(this);
         viewHolder.tvTransactionIcon.setTag(position);
         // Return the completed view to render on screen
