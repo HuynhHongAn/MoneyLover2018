@@ -3,7 +3,9 @@ package com.nmcnpm.nhom10.moneylover;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,8 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
     Context mContext;
 
     NumberFormat format = NumberFormat.getCurrencyInstance();
+
+    private static final String TAG = "TransactionAdapter";
 
     // View lookup cache
     private static class ViewHolder {
@@ -44,7 +48,7 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
 
         int position=(Integer) v.getTag();
         Object object= getItem(position);
-        TransactionModel TransactionModel=(TransactionModel)object;
+        TransactionModel transactionModel=(TransactionModel)object;
 
         switch (v.getId())
         {
@@ -57,6 +61,7 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
 
     private int lastPosition = -1;
 
+    @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
@@ -89,20 +94,18 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
         result.startAnimation(animation);
         lastPosition = position;
 
-        Boolean isNavigation = transactionModel.getIsNegative();
-        if (isNavigation){
-            //DO NOTHING
-        }
-        else {
-            viewHolder.tvAmount.setTextColor(Color.parseColor("#256CDE"));
-
-        }
+        assert transactionModel != null;
         viewHolder.tvAmount.setText(format.format(transactionModel.getAmount()));
         viewHolder.tvName.setText(transactionModel.getName());
         viewHolder.tvNote.setText(transactionModel.getNote());
         viewHolder.tvDate.setText(transactionModel.getDate());
         viewHolder.tvTransactionIcon.setOnClickListener(this);
         viewHolder.tvTransactionIcon.setTag(position);
+
+        Log.d(TAG, "position: " +position + " amount: " + (Boolean) (transactionModel.getAmount() > 0));
+        if (transactionModel.getAmount() > 0) {
+            viewHolder.tvAmount.setTextColor(Color.parseColor("#256CDE"));
+        }
         // Return the completed view to render on screen
         return convertView;
     }

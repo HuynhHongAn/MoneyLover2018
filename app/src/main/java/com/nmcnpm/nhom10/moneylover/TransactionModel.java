@@ -1,25 +1,27 @@
 package com.nmcnpm.nhom10.moneylover;
 
-public class TransactionModel {
+import java.io.Serializable;
+
+public class TransactionModel implements Serializable {
+    String id;
     String date;
-    Float amount;
+    Double amount;
     String name;
     String iconScr;
     String note;
     String wallet;
-    Boolean isNegative = true;
 
-    public TransactionModel(Float amount, String name, String date, String note, String wallet) {
+    public TransactionModel(String id, Double amount, String name, String date, String note, String wallet) {
+        this.id = id;
         this.wallet = wallet;
         this.date = date;
         this.amount = amount;
         this.name = name;
         this.note = note;
-        this.isNegative = amount < 0;
 
     }
 
-    public Float getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
@@ -35,5 +37,6 @@ public class TransactionModel {
 
     public String getWallet() { return wallet; }
 
-    public Boolean getIsNegative() { return isNegative; }
+
+    public String getId() {return id;}
 }

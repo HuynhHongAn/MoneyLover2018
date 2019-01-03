@@ -34,6 +34,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TransactionsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -114,15 +115,15 @@ public class TransactionsActivity extends AppCompatActivity
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Float amount = Float.valueOf(document.getData().get("amount").toString());
+                                Double amount = Double.valueOf(document.getData().get("amount").toString());
                                 String name = document.getData().get("name").toString();
                                 String date = document.getData().get("date").toString();
                                 String note = document.getData().get("note").toString();
                                 String wallet = document.getData().get("wallet").toString();
 
-                                TransactionModel newTransaction = new TransactionModel(amount, name, date, note, wallet);
+                                TransactionModel newTransaction = new TransactionModel(document.getId(), amount, name, date, note, wallet);
                                 dataModels.add(newTransaction);
-                                float tempAmount = newTransaction.getAmount();
+                                double tempAmount = newTransaction.getAmount();
                                 if (tempAmount > 0){
                                     totalPositive += tempAmount;
                                 } else {
@@ -132,6 +133,8 @@ public class TransactionsActivity extends AppCompatActivity
                                 Log.d(TAG, document.getId() + " => " + dataModels);
 
                             }
+
+                            Collections.reverse(dataModels);
 
                             adapter = new TransactionAdapter(dataModels, TransactionsActivity.this);
                             tvNegativeTotal.setText(format.format(totalNegative));
@@ -147,12 +150,15 @@ public class TransactionsActivity extends AppCompatActivity
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                                     TransactionModel dataModel= dataModels.get(position);
+                                    Log.d(TAG, parent.getId() + " Hello world!");
 
 
 
-//                Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getDate()+" API: "+dataModel.getAmount(), Snackbar.LENGTH_LONG)
-//                        .setAction("No action", null).show();
+//                                    Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getDate()+" API: "+dataModel.getAmount(), Snackbar.LENGTH_LONG)
+//                                            .setAction("No action", null).show();
+
                                     Intent i = new Intent(getApplicationContext(), TransactionEditActivity.class);
+                                    i.putExtra("transaction", dataModel);
                                     startActivity(i);
 
                                 }
