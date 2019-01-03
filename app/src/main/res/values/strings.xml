@@ -117,6 +117,13 @@
         <item>Baht (฿)</item>
     </string-array>
 
+    <string-array name="type_array">
+        <item>Daily</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+        <item>By season</item>
+    </string-array>
+
     <string-array name="currency_list_values">
         <item>0</item>
         <item>1</item>
