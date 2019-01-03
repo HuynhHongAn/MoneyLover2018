@@ -138,7 +138,10 @@
         <ListView
             android:id="@+id/lvTransaction"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:paddingBottom="80dp"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideOverlay"/>
     </RelativeLayout>
 
 </LinearLayout>

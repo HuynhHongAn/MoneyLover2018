@@ -78,8 +78,10 @@ public class TransactionEditActivity extends AppCompatActivity implements View.O
         intent = new Intent(this, TransactionsActivity.class);
         switch(v.getId()) {
             case R.id.btnSave:
+                //delete
                 deleteTransaction(transaction.getId());
 
+                //then create another object
                 Float amount = Float.valueOf(etAmount.getText().toString());
                 String name = etName.getText().toString();
                 String note = etNote.getText().toString();
@@ -87,10 +89,15 @@ public class TransactionEditActivity extends AppCompatActivity implements View.O
                 String wallet = etWallet.getText().toString();
 
                 createTransaction(amount, name, note, date, wallet);
+
+
+                intent.putExtra("message", "Updated successfully");
                 break;
             case R.id.btnDelete:
                 Log.d(TAG, "Transaction id: " + transaction.getId());
                 deleteTransaction(transaction.getId());
+
+                intent.putExtra("message", "Deleted successfully");
                 break;
             default:
                 break;

@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -63,6 +64,11 @@ public class TransactionsActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         db = FirebaseFirestore.getInstance();
+
+        if (getIntent().getStringExtra("message") != null){
+            Toast.makeText(getApplicationContext(), getIntent().getStringExtra("message"),
+                    Toast.LENGTH_LONG).show();
+        }
 
         tvNegativeTotal = findViewById(R.id.tvNegativeTotal);
         tvPositiveTotal = findViewById(R.id.tvPositiveTotal);

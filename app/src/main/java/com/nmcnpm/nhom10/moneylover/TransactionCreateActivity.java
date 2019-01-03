@@ -77,6 +77,7 @@ public class TransactionCreateActivity extends AppCompatActivity {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                         //TODO: make toast and return to listing transaction page
                         Intent intent = new Intent(TransactionCreateActivity.this, TransactionsActivity.class);
+                        intent.putExtra("message", "Created successfully");
                         startActivity(intent);
                     }
                 })
