@@ -82,6 +82,13 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
             viewHolder.tvNote = (TextView) convertView.findViewById(R.id.tvNote);
             viewHolder.tvTransactionIcon = (ImageView) convertView.findViewById(R.id.ivTransactionIcon);
 
+            if (transactionModel.getAmount() > 0) {
+                if (position == 0) {
+                    int A = 10;
+                }
+                viewHolder.tvAmount.setTextColor(Color.parseColor("#256CDE"));
+            }
+
             result=convertView;
 
             convertView.setTag(viewHolder);
@@ -103,9 +110,6 @@ public class TransactionAdapter extends ArrayAdapter<TransactionModel> implement
         viewHolder.tvTransactionIcon.setTag(position);
 
         Log.d(TAG, "position: " +position + " amount: " + (Boolean) (transactionModel.getAmount() > 0));
-        if (transactionModel.getAmount() > 0) {
-            viewHolder.tvAmount.setTextColor(Color.parseColor("#256CDE"));
-        }
         // Return the completed view to render on screen
         return convertView;
     }

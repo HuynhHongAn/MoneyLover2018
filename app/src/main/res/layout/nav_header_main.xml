@@ -28,8 +28,8 @@
             android:contentDescription="@string/nav_header_desc"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:adjustViewBounds="true"
-            android:maxWidth="100dp"
-            android:maxHeight="100dp"
+            android:maxWidth="90dp"
+            android:maxHeight="90dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/money_icon" />
 

@@ -2,6 +2,7 @@ package com.nmcnpm.nhom10.moneylover;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -13,6 +14,8 @@ public class WalletCreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wallet_create);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         Spinner spinner = (Spinner) findViewById(R.id.languages_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
